@@ -10,13 +10,6 @@
 /* LANDUSE & LANDCOVER
 /* ================================================================== */
 
-#land[zoom>=0][zoom<6],
-#shoreline_300[zoom>=6][zoom<10],
-#processed_p[zoom>=10] {
-  polygon-fill: @land;
-  polygon-gamma: 0.75;
-}
-
 #landuse_gen0[zoom>3][zoom<=9],
 #landuse_gen1[zoom>9][zoom<=12],
 #landuse[zoom>12] {
@@ -41,10 +34,11 @@
   [type='wood']          { polygon-fill: @wooded; }
 }
 
-#glacier_gen0[zoom>3][zoom<=9]{
+#icesheet-poly,
+#glacier_large[zoom>3][zoom<=9]{
   polygon-fill: @glacier_low;
 }
-#glacier_gen1[zoom>9][zoom<=12],
+#glacier_large[zoom>9][zoom<=12],
 #glacier[zoom>12] {
   polygon-fill: @glacier;
   ::outline{
@@ -100,7 +94,7 @@
 /* WATER AREAS
 /* ================================================================== */
 
-Map { background-color: @land; }
+Map { background-color: @water; }
 
 #water_gen0[zoom>3][zoom<=9],
 #water_gen1[zoom>9][zoom<=12],
@@ -173,11 +167,27 @@ Map { background-color: @land; }
 /* ================================================================== */
 
 
-#admin_land_poly[admin_level='2'][zoom>1] {
+#admin_land_poly[zoom>1][zoom<=6] {
   line-color:@admin_2;
   [zoom=2] { line-opacity: 0.25; }
   [zoom=3] { line-opacity: 0.3; }
   [zoom=4] { line-opacity: 0.4; }
+  [zoom <= 8]{
+    line-width:2;
+  }
+  [zoom > 8]{
+    line-width:10;
+    line-opacity:0.3;
+    line-offset:6;
+    ::boundary{
+      line-width:2;
+      line-color:@admin_2;
+    }
+  }
+}
+
+#admin[admin_level='2'][zoom>6] {
+  line-color:@admin_2;
   [zoom <= 8]{
     line-width:2;
   }
@@ -200,42 +210,28 @@ Map { background-color: @land; }
   [zoom=4] { line-opacity: 0.4; }
 }
 
-/* ================================================================== */
-/* BARRIER POINTS
-/* ================================================================== */
 
-
-#barrier_points[zoom>=17][stylegroup = 'divider'] {
-  marker-height: 2;
-  marker-fill: #c7c7c7;
-  marker-line-opacity:0;
-  marker-allow-overlap:true;
+#hillshading {
+  [zoom >= 9] {
+    raster-opacity:0.4;
+    raster-scaling: bilinear;
+    raster-comp-op: darken;
+  }
 }
 
-/* ================================================================== */
-/* BARRIER LINES
-/* ================================================================== */
-
-#barrier_lines[zoom>=17][stylegroup = 'gate'] {
-  line-width:2.5;
-  line-color:#aab;
-  line-dasharray:3,2;
+#hillshade-small {
+  [zoom < 9][zoom >= 7] {
+    raster-opacity:0.4;
+    raster-scaling: bilinear;
+    raster-comp-op: darken;
+  }
 }
 
-#barrier_lines[zoom>=17][stylegroup = 'fence'] {
-  line-width:1.75;
-  line-color:#aab;
-  line-dasharray:1,1;
-}
-
-#barrier_lines[zoom>=17][stylegroup = 'hedge'] {
-  line-width:3;
-  line-color:darken(@park,5%);
-
-}
-
-#swisshills {
-  raster-opacity:0.5;
-  raster-scaling: bilinear;
+#hillshade-tiny {
+  [zoom < 7] {
+    raster-opacity:0.4;
+    raster-scaling: bilinear;
+    raster-comp-op: darken;
+  }
 }
 

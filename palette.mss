@@ -21,12 +21,113 @@
 Map { font-directory: url(./fonts); }
 
 /* set up font sets for various weights and styles */
-@sans_lt:           "Open Sans Regular","DejaVu Sans Book","unifont Medium";
-@sans_lt_italic:    "Open Sans Italic","DejaVu Sans Italic","unifont Medium";
-@sans:              "Open Sans Semibold","DejaVu Sans Book","unifont Medium";
-@sans_italic:       "Open Sans Semibold Italic","DejaVu Sans Italic","unifont Medium";
-@sans_bold:         "Open Sans Bold","DejaVu Sans Bold","unifont Medium";
-@sans_bold_italic:  "Open Sans Bold Italic","DejaVu Sans Bold Italic","unifont Medium";
+@fallback:      "Noto Sans Regular",
+                "Noto Sans CJK JP Regular",
+                "Noto Sans Adlam Regular", "Noto Sans Adlam Unjoined Regular"
+                "Noto Sans Armenian Regular",
+                "Noto Sans Balinese Regular",
+                "Noto Sans Bamum Regular",
+                "Noto Sans Batak Regular",
+                "Noto Sans Bengali UI Regular",
+                "Noto Sans Buginese Regular",
+                "Noto Sans Buhid Regular",
+                "Noto Sans Canadian Aboriginal Regular",
+                "Noto Sans Chakma Regular",
+                "Noto Sans Cham Regular",
+                "Noto Sans Cherokee Regular",
+                "Noto Sans Coptic Regular",
+                "Noto Sans Devanagari UI Regular",
+                "Noto Sans Ethiopic Regular",
+                "Noto Sans Georgian Regular",
+                "Noto Sans Gujarati UI Regular",
+                "Noto Sans Gurmukhi UI Regular",
+                "Noto Sans Hanunoo Regular",
+                "Noto Sans Hebrew Regular",
+                "Noto Sans Javanese Regular",
+                "Noto Sans Kannada UI Regular",
+                "Noto Sans Kayah Li Regular",
+                "Noto Sans Khmer UI Regular",
+                "Noto Sans Lao UI Regular",
+                "Noto Sans Lepcha Regular",
+                "Noto Sans Limbu Regular",
+                "Noto Sans Lisu Regular",
+                "Noto Sans Malayalam UI Regular",
+                "Noto Sans Mandaic Regular",
+                "Noto Sans Mongolian Regular",
+                "Noto Sans Myanmar UI Regular",
+                "Noto Sans New Tai Lue Regular",
+                "Noto Sans NKo Regular",
+                "Noto Sans Ol Chiki Regular",
+                "Noto Sans Oriya UI Regular",
+                "Noto Sans Osage Regular",
+                "Noto Sans Osmanya Regular",
+                "Noto Sans Samaritan Regular",
+                "Noto Sans Saurashtra Regular",
+                "Noto Sans Shavian Regular",
+                "Noto Sans Sinhala UI Regular",
+                "Noto Sans Sinhala Regular",
+                "Noto Sans Sundanese Regular",
+                "Noto Sans Symbols Regular",
+                "Noto Sans Symbols2 Regular",
+                "Noto Sans Syriac Eastern Regular",
+                "Noto Sans Syriac Estrangela Regular",
+                "Noto Sans Syriac Western Regular",
+                "Noto Sans Tagalog Regular",
+                "Noto Sans Tagbanwa Regular",
+                "Noto Sans Tai Le Regular",
+                "Noto Sans Tai Tham Regular",
+                "Noto Sans Tai Viet Regular",
+                "Noto Sans Tamil UI Regular",
+                "Noto Sans Telugu UI Regular",
+                "Noto Sans Thaana Regular",
+                "Noto Sans Thai UI Regular",
+                "Noto Sans Tibetan Regular",
+                "Noto Sans Tifinagh Regular",
+                "Noto Sans Vai Regular",
+                "Noto Sans Yi Regular",
+                "Noto Sans Arabic UI Regular",
+                "Noto Emoji Regular",
+                "Noto Naskh Arabic UI Regular",
+                "DejaVu Sans Book",
+                "HanaMinA Regular", "HanaMinB Regular",
+                "Unifont Medium", "unifont Medium", "Unifont Upper Medium";
+
+@fallback_bold: "Noto Sans Bold",
+                "Noto Sans CJK JP Bold",
+                "Noto Sans Armenian Bold",
+                "Noto Sans Bengali UI Bold",
+                "Noto Sans Cham Bold",
+                "Noto Sans Cherokee Bold",
+                "Noto Sans Devanagari UI Bold",
+                "Noto Sans Ethiopic Bold",
+                "Noto Sans Georgian Bold",
+                "Noto Sans Gujarati UI Bold",
+                "Noto Sans Gurmukhi UI Bold",
+                "Noto Sans Hebrew Bold",
+                "Noto Sans Kannada UI Bold",
+                "Noto Sans Khmer UI Bold",
+                "Noto Sans Lao UI Bold",
+                "Noto Sans Malayalam UI Bold",
+                "Noto Sans Myanmar UI Bold",
+                "Noto Sans Oriya UI Bold",
+                "Noto Sans Sinhala UI Bold",
+                "Noto Sans Sinhala Bold",
+                "Noto Sans Symbols Bold",
+                "Noto Sans Tamil UI Bold",
+                "Noto Sans Telugu UI Bold",
+                "Noto Sans Thaana Bold",
+                "Noto Sans Thai UI Bold",
+                "Noto Sans Tibetan Bold",
+                "Noto Sans Arabic UI Bold",
+                "Noto Naskh Arabic UI Bold",
+                "DejaVu Sans Bold";
+
+@sans_lt:           "Open Sans Regular","DejaVu Sans Book",@fallback_bold,@fallback,@fallback;
+@sans_lt_italic:    "Open Sans Italic","DejaVu Sans Italic","Noto Sans Italic",@fallback;
+@sans:              "Open Sans Semibold","DejaVu Sans Book",@fallback;
+@sans_italic:       "Open Sans Semibold Italic","DejaVu Sans Italic","Noto Sans Italic",@fallback;
+@sans_bold:         "Open Sans Bold","DejaVu Sans Bold",@fallback_bold,@fallback;
+@sans_bold_italic:  "Open Sans Bold Italic","DejaVu Sans Bold Italic","Noto Sans Bold Italic",@fallback_bold,@fallback;
 
 /* Some fonts are larger or smaller than others. Use this variable to
    globally increase or decrease the font sizes. */
@@ -37,13 +138,13 @@ Map { font-directory: url(./fonts); }
 /* LANDUSE & LANDCOVER COLORS
 /* ================================================================== */
 
-@land:              #fffcc6;
-@water:             #77bbf6;
+@land:              mix(#fffcc6, #FFF, 50%);
+@water:             mix(#77bbf6, #FFF, 50%);
 @grass:             #ccf749;
 @beach:             #ffda85;
 @park:              #aef166;
 @cemetery:          #D6DED2;
-@wooded:            #76d11c;
+@wooded:            mix(#76d11c, #FFF, 50%);
 @agriculture:       #F2E8B6;
 
 @building:          #b5adad;
