@@ -679,6 +679,46 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "srs-name": "900913",
       "status": "on"
+    },
+    {
+      "Datasource": {
+        "dbname": "gis",
+        "extent": "-20037508.34 -20037508.34 20037508.34 20037508.34",
+        "geometry_field": "way",
+        "id": "addresses",
+        "key_field": "",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "table": "(SELECT
+            ST_PointOnSurface(way) AS way,
+            \"addr:housenumber\" AS addr_housenumber,
+            \"addr:housename\" AS addr_housename,
+            tags->'addr:unit' AS addr_unit,
+            tags->'addr:flats' AS addr_flats,
+            way_area/NULLIF(POW(!scale_denominator!*0.001*0.28,2),0) AS way_pixels
+          FROM planet_osm_polygon
+          WHERE way && !bbox!
+            AND ((\"addr:housenumber\" IS NOT NULL) OR (\"addr:housename\" IS NOT NULL) OR ((tags->'addr:unit') IS NOT NULL) OR ((tags->'addr:flats') IS NOT NULL))
+            AND building IS NOT NULL
+            AND way_area < 4000000*POW(!scale_denominator!*0.001*0.28,2)
+        UNION ALL
+        SELECT
+            way,
+            \"addr:housenumber\" AS addr_housenumber,
+            \"addr:housename\" AS addr_housename,
+            tags->'addr:unit' AS addr_unit,
+            tags->'addr:flats' AS addr_flats,
+            NULL AS way_pixels
+          FROM planet_osm_point
+          WHERE way && !bbox!
+            AND ((\"addr:housenumber\" IS NOT NULL) OR (\"addr:housename\" IS NOT NULL) OR ((tags->'addr:unit') IS NOT NULL) OR ((tags->'addr:flats') IS NOT NULL))
+          ORDER BY way_pixels DESC NULLS LAST
+        ) AS addresses",
+        "type": "postgis"
+      },
+      "id": "addresses",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "srs-name": "900913",
+      "properties": {"minzoom": 17}
     }
   ],
   "scale": 1,

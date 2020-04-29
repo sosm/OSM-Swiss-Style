@@ -240,6 +240,9 @@ Map { font-directory: url(./fonts); }
 @other_text:        #888;
 @other_halo:        @place_halo;
 
+@addr_text:         #888;
+@addr_halo:         @place_halo;
+
 @locality_text:     #aaa;
 @locality_halo:     @land;
 
